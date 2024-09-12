@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMsV1k3cX5aoXz2b0F5p9rWI2pH4+VfxKP6mk/i" crossorigin="anonymous">
+    <style>
+        p {
+            font-family: 'Dancing Script', cursive;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f3f3;
+        }
+
+        .container {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            perspective: 1500px;
+        }
+
+        .card {
+            will-change: transform;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.6s ease-in-out;
+            background-color: white; /* Default color */
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(-30px) translateZ(0px) scale(1.05) rotate(0deg);
+            z-index: 1;
+        }
+
+        .card:not(.visible) {
+            opacity: 0.3;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 60%;
+            margin-top: 20px;
+            border-radius: 8px;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 100px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;    
+            padding: 0 20px;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 18px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        button i {
+            font-size: 20px;
+        }
+        /* Media query para móviles */
+        @media (max-width: 768px) {
+            .container {
+                width: 300px;
+                height: 450px;
+                perspective: 1000px; /* Reducir la perspectiva en móviles */
+            }
+
+            .card {
+                padding: 10px;
+                transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Animaciones más rápidas en móviles */
+            }
+
+            .card.visible {
+                transform: translateY(-15px) translateZ(0px) scale(1.02); /* Ajustes menores en las transformaciones */
+            }
+
+            .card:not(.visible) {
+                opacity: 0.9; /* Menos diferencia de opacidad */
+                transform: translateY(5px) translateZ(-20px) rotate(1deg); /* Menos profundidad */
+            }
+
+            img {
+                max-height: 50%; /* Ajustar el tamaño de las imágenes en móviles */
+            }
+
+            button {
+                padding: 10px;
+                font-size: 16px;
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card visible" id="card1" style="--index: 0; background-color: #FFB6C1;">
+            <div class="content">
+                <p>Hello Mel, ¿cómo estás? Espero que bien. ¿Tienes un minuto? Supondré que sí porque lo abriste y tampoco puse algo para que respondas jajaja</p>
+            </div>
+        </div>
+        <div class="card" id="card2" style="--index: 1; background-color: #FFDEAD;">
+            <div class="content">
+                <p>¿Recuerdas lo que te dije hace unas semanas?</p>
+            </div>
+        </div>
+        <div class="card" id="card3" style="--index: 2; background-color: #E6E6FA;">
+            <div class="content">
+                <p>Las estrellas crean algunos elementos que necesitamos para vivir, y por eso creo que algunas personas brillan de una forma tan especial, tienen esa chispa dentro de sí.</p>
+                <img src="estrella.png" alt="Estrellas">
+            </div>
+        </div>
+        <div class="card" id="card4" style="--index: 3; background-color: #B0E0E6;">
+            <div class="content">
+                <p>Tu nombre empieza con la M, ¿sabes qué más?</p>
+                <img src="m.png" alt="M">
+            </div>
+        </div>
+        <div class="card" id="card5" style="--index: 4; background-color: #FFFACD;">
+            <div class="content">
+                <p>El nombre de muchas personas exitosas, en el deporte por ejemplo, tienes a Messi en el fútbol..</p>
+                <img src="messi.jpg" alt="Messi">
+            </div>
+        </div>
+        <div class="card" id="card6" style="--index: 5; background-color: #FFD700;">
+            <div class="content">
+                <p>a Michael Schumacher en Fórmula 1.</p>
+                <img src="schumacher.jpg" alt="Michael Schumacher">
+            </div>
+        </div>
+        <div class="card" id="card7" style="--index: 6; background-color: #E6E6FA;">
+            <div class="content">
+                <p>En la música, Michael Jackson</p>
+                <img src="mj.jpg" alt="Michael Jackson">
+            </div>
+        </div>
+        <div class="card" id="card8" style="--index: 7; background-color: #FFB6C1;">
+            <div class="content">
+                <p>O canciones, como *Motivos*.</p>
+                <img src="motivos.jpg" alt="Canción Motivos">
+            </div>
+        </div>
+        <div class="card" id="card9" style="--index: 8; background-color: #FFDEAD;">
+            <div class="content">
+                <p>Personas muy lindas, como Marilyn Monroe.</p>
+                <img src="marylinmonroe.jpg" alt="Marilyn Monroe">
+            </div>
+        </div>
+        <div class="card" id="card10" style="--index: 9; background-color: #B0E0E6;">
+            <div class="content">
+                <p>Inclusive cosas, como el mar.</p>
+                <img src="mar.jpg" alt="El Mar">
+            </div>
+        </div>
+        <div class="card" id="card11" style="--index: 10; background-color: #FFFACD;">
+            <div class="content">
+                <p>museos</p>
+                <img src="museo.jpg" alt="Museo">
+            </div>
+        </div>
+        <div class="card" id="card12" style="--index: 11; background-color: #FFD700;">
+            <div class="content">
+                <p>ciudades, como Milán</p>
+                <img src="milan.jpeg" alt="Milán">
+            </div>
+        </div>
+        <div class="card" id="card13" style="--index: 12; background-color: #E6E6FA;">
+            <div class="content">
+                <p>O Madrid.</p>
+                <img src="madrid.jpg" alt="Madrid">
+            </div>
+        </div>
+        <div class="card" id="card14" style="--index: 13; background-color: #FFB6C1;">
+            <div class="content">
+                <p>Planetas como Mercurio.</p>
+                <img src="mercurio.png" alt="Mercurio">
+            </div>
+        </div>
+        <div class="card" id="card15" style="--index: 14; background-color: #FFDEAD;">
+            <div class="content">
+                <p>Y estrellas, como Maia.</p>
+                <img src="maiaa.jpeg" alt="Estrella Maia">
+            </div>
+        </div>
+        <div class="card" id="card16" style="--index: 15; background-color: #B0E0E6;">
+            <div class="content">
+                <p>Está en logros también</p>
+                <img src="logro.png" alt="Logros">
+            </div>
+        </div>
+        <div class="card" id="card17" style="--index: 16; background-color: #FFFACD;">
+            <div class="content">
+                <p>como la primera estación espacial de Rusia, Mir.</p>
+                <img src="mir.jpg" alt="Estación Mir">
+            </div>
+        </div>
+        <div class="card" id="card18" style="--index: 17; background-color: #FFD700;">
+            <div class="content">
+                <p>¿Sabes qué tiene que ver contigo? Es simple.</p>
+            </div>
+        </div>
+        <div class="card" id="card19" style="--index: 18; background-color: #E6E6FA;">
+            <div class="content">
+                <p>Hay personas que tienen todas esas cosas en común, como tú.</p>
+            </div>
+        </div>
+        <div class="card" id="card20" style="--index: 19; background-color: #FFB6C1;">
+            <div class="content">
+                <p>Cosas únicas y especiales, como tu sonrisa</p>
+                <img src="sonrisa.png" alt="Sonrisa">
+            </div>
+        </div>
+        <div class="card" id="card21" style="--index: 20; background-color: #FFDEAD;">
+            <div class="content">
+                <p>o lindas, como tu mirada</p>
+                <img src="ojos.png" alt="Mirada">
+            </div>
+        </div>
+        <div class="card" id="card22" style="--index: 21; background-color: #B0E0E6;">
+            <div class="content">
+                <p>Cuando quieras lograr algo, piensa en cómo va a sonar tu nombre cuando pensemos en gente increíble, a mí me gusta la idea.</p>
+            </div>
+        </div>
+        <div class="card" id="card23" style="--index: 22; background-color: #FFFACD;">
+            <div class="content">
+                <p>Recuerdo que el día que nos conocimos, para el lanzamiento, dijiste que las flores eran importantes, así que aquí te dejo unas virtuales:</p>
+                <video controls width="100%" style="border-radius: 8px;">
+                    <source src="flores.mp4" type="video/mp4">
+                    <!-- Texto alternativo para navegadores que no soporten video -->
+                    Tu navegador no soporta la reproducción de video.
+                </video>
+            </div>
+        </div>        
+        <div class="card" id="card24" style="--index: 23; background-color: #FFD700;">
+            <div class="content">
+                <p>Suerte, tú puedes.</p>
+                <img src="mel.png" alt="Motivación final">
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="prev"><i class="fas fa-arrow-left"></i></button>
+        <button id="next"><i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+        let currentCard = 0;
+    
+        // Variables para el deslizamiento
+        let startX = 0;
+        let endX = 0;
+    
+        function updateCardVisibility() {
+            cards.forEach((card, index) => {
+                if (index === currentCard) {
+                    card.classList.add('visible');
+                } else {
+                    card.classList.remove('visible');
+                    card.style.transform = `translateY(${(index - currentCard) * 10}px) translateZ(${(index - currentCard) * -50}px) rotate(${(index - currentCard) * 2}deg)`;
+                }
+                card.style.setProperty('--index', index - currentCard);
+            });
+        }
+    
+        document.getElementById('next').addEventListener('click', () => {
+            if (currentCard < cards.length - 1) {
+                currentCard++;
+                updateCardVisibility();
+            }
+        });
+    
+        document.getElementById('prev').addEventListener('click', () => {
+            if (currentCard > 0) {
+                currentCard--;
+                updateCardVisibility();
+            }
+        });
+    
+        // Función para detectar el inicio del toque
+        document.querySelector('.container').addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX; // Coordenada inicial del toque
+        });
+    
+        // Prevenir el desplazamiento horizontal
+        document.querySelector('.container').addEventListener('touchmove', (e) => {
+            e.preventDefault(); // Prevenir el desplazamiento en el eje X
+        });
+    
+        // Función para detectar el final del toque
+        document.querySelector('.container').addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX; // Coordenada final del toque
+            handleSwipe();
+        });
+    
+        // Función para manejar el deslizamiento
+        function handleSwipe() {
+            let swipeDistance = endX - startX;
+    
+            // Si el deslizamiento es significativo (por ejemplo, más de 50px)
+            if (swipeDistance > 50 && currentCard > 0) {
+                currentCard--; // Deslizar hacia la derecha (anterior)
+                updateCardVisibility();
+            } else if (swipeDistance < -50 && currentCard < cards.length - 1) {
+                currentCard++; // Deslizar hacia la izquierda (siguiente)
+                updateCardVisibility();
+            }
+        }
+    
+        updateCardVisibility();
+    </script>       
+</body>
+</html>
